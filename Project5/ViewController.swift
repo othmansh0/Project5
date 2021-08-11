@@ -26,11 +26,17 @@ class ViewController: UITableViewController {
             allWords = ["silkworm"]
         }
         
-        
+        startGame()
         
     }
     
     
+    
+    func startGame(){
+        title = allWords.randomElement()
+        usedWords.removeAll()
+        tableView.reloadData()
+    }
 
 
 }
