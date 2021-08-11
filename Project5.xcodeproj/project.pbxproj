@@ -13,6 +13,7 @@
 		12360B7626C397B200064CDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12360B7426C397B200064CDB /* Main.storyboard */; };
 		12360B7826C397B300064CDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12360B7726C397B300064CDB /* Assets.xcassets */; };
 		12360B7B26C397B300064CDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12360B7926C397B300064CDB /* LaunchScreen.storyboard */; };
+		12360B8426C39D4800064CDB /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12360B8326C39D4800064CDB /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		12360B7726C397B300064CDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12360B7A26C397B300064CDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12360B7C26C397B300064CDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12360B8326C39D4800064CDB /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				12360B7226C397B200064CDB /* ViewController.swift */,
 				12360B7426C397B200064CDB /* Main.storyboard */,
 				12360B7726C397B300064CDB /* Assets.xcassets */,
+				12360B8326C39D4800064CDB /* start.txt */,
 				12360B7926C397B300064CDB /* LaunchScreen.storyboard */,
 				12360B7C26C397B300064CDB /* Info.plist */,
 			);
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12360B7B26C397B300064CDB /* LaunchScreen.storyboard in Resources */,
+				12360B8426C39D4800064CDB /* start.txt in Resources */,
 				12360B7826C397B300064CDB /* Assets.xcassets in Resources */,
 				12360B7626C397B200064CDB /* Main.storyboard in Resources */,
 			);
