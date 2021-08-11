@@ -74,6 +74,52 @@ class ViewController: UITableViewController {
     
     
     func submit(_ answer: String) {
+        let lowerAnswer = answer.lowercased()
+        
+        if isPossible(word: lowerAnswer){
+            if isOriginal(word: lowerAnswer){
+                if isReal(word: lowerAnswer){
+                    usedWords.insert(lowerAnswer, at: 0)
+                    
+                    // For adding cells smoothly
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    tableView.insertRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+        
+    }
+    
+    
+    func isPossible(word: String) -> Bool {
+        guard var tempWord = title?.lowercased() else {return false}
+        
+        for letter in word {
+            if let position = tempWord.firstIndex(of: letter){
+                tempWord.remove(at: position)
+            }
+            else {return false}
+            
+        }
+        
+        
+        return true
+    }
+
+    func isOriginal(word: String) -> Bool {
+        return !usedWords.contains(word)
+    }
+
+    func isReal(word: String) -> Bool {
+       // UITextChecker. This is an iOS class that is designed to spot spelling errors,
+        //Rule: when working with any apple framework use utf16.count for char count,if it's your own code use .count
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.utf16.count)
+        let misselledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        
+        //what we care about whether any misspelling was found, and if nothing was found our NSRange ( rangeOfMisspelledWord(in:)) will have the special location NSNotFound
+        return misselledRange.location == NSNotFound
     }
 
 }
