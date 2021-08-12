@@ -46,7 +46,7 @@ class ViewController: UITableViewController {
     func startGame(){
         title = allWords.randomElement()
         usedWords.removeAll()
-        tableView.reloadData()
+        tableView.reloadData()//call numberOfRowsInSection again + calling cellForRowAt repeatedly
     }
 
     @objc func promptForAnswer() {
@@ -112,12 +112,11 @@ class ViewController: UITableViewController {
         
     }
     
-    
     func isPossible(word: String) -> Bool {
         guard var tempWord = title?.lowercased() else {return false}
         
         for letter in word {
-            if let position = tempWord.firstIndex(of: letter){
+            if let position = tempWord.firstIndex(of: letter){//return first position of substring or nil
                 tempWord.remove(at: position)
             }
             else {return false}
@@ -129,19 +128,20 @@ class ViewController: UITableViewController {
     }
 
     func isOriginal(word: String) -> Bool {
-        return !usedWords.contains(word)
+        return !usedWords.contains(word) //check if answer is repeated
     }
 
     func isReal(word: String) -> Bool {
-       // UITextChecker. This is an iOS class that is designed to spot spelling errors,
-        //Rule: when working with any apple framework use utf16.count for char count,if it's your own code use .count
+       // UITextChecker iOS class designed to spot spelling errors
+       //Rule: when working with any apple framework use utf16.count for char count,if it's your own code use .count
+        
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
-        let misselledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
         
         
         //what we care about whether any misspelling was found, and if nothing was found our NSRange ( rangeOfMisspelledWord(in:)) will have the special location NSNotFound
-        return misselledRange.location == NSNotFound
+        return misspelledRange.location == NSNotFound
     }
 
 }
