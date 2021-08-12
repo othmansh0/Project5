@@ -96,7 +96,7 @@ class ViewController: UITableViewController {
                 
             } else {
                 errorTitle = "Word used already"
-                           errorMessage = "Be more original!"
+                errorMessage = "Be more original!"
             }
         } else {
             guard let title = title?.lowercased() else {
@@ -106,10 +106,8 @@ class ViewController: UITableViewController {
             errorMessage = "You can't spell that word from \(title)"
             
         }
-        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Continue", style: .default))
-        present(ac, animated: true)
-        
+       
+        showErrorMessage(errorMessage: errorMessage, errorTitle: errorTitle)
     }
     
     func isPossible(word: String) -> Bool {
@@ -149,6 +147,15 @@ class ViewController: UITableViewController {
         //what we care about whether any misspelling was found, and if nothing was found our NSRange ( rangeOfMisspelledWord(in:)) will have the special location NSNotFound
         return misspelledRange.location == NSNotFound
     }
+    
+    
+    func showErrorMessage(errorMessage: String, errorTitle: String) {
+        
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Continue", style: .default))
+        present(ac, animated: true)
+    }
+    
 
 }
 
