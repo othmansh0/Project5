@@ -21,11 +21,11 @@ class ViewController: UITableViewController {
         if let startWordsUrl = Bundle.main.url(forResource: "start", withExtension: "txt"){
             if let startWords = try? String(contentsOf: startWordsUrl){
                 //try?:"call this code, and if it throws an error just send back nil"
-                allWords = startWords.components(separatedBy: "\n")
+                allWords = startWords.components(separatedBy: "\n") //splits string into array
             }
         }
         
-        if allWords.isEmpty {
+        if allWords.isEmpty { //faster than .count == 0
             allWords = ["silkworm"]
         }
         
@@ -134,6 +134,12 @@ class ViewController: UITableViewController {
     func isReal(word: String) -> Bool {
        // UITextChecker iOS class designed to spot spelling errors
        //Rule: when working with any apple framework use utf16.count for char count,if it's your own code use .count
+        guard let title = title else {
+            return false
+        }
+        if(word.count < 3 || word == title) {
+            return false
+        }
         
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
