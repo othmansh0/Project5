@@ -11,8 +11,13 @@ class ViewController: UITableViewController {
 
     var allWords = [String]()
     var usedWords = [String]()
+  
     
-    
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        let defaults = UserDefaults.standard
+//        defaults.set(usedWords,forKey: "usedWords")
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +34,14 @@ class ViewController: UITableViewController {
         if allWords.isEmpty { //faster than .count == 0
             allWords = ["silkworm"]
         }
+        let defaults = UserDefaults.standard
+        let loadedArray = defaults.object(forKey: "usedWords") as? [String] ?? [String]()
+        usedWords = loadedArray
+        print(loadedArray)
         
+        let ac2 = UIAlertController(title: "", message: loadedArray.joined(separator: ","), preferredStyle: .alert)
+        ac2.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        present(ac2, animated: true, completion: nil)
         startGame()
         
     }
@@ -46,12 +58,12 @@ class ViewController: UITableViewController {
     
     @objc func startGame(){
         title = allWords.randomElement()
-        usedWords.removeAll()
+        //usedWords.removeAll()
         tableView.reloadData()//call numberOfRowsInSection again + calling cellForRowAt repeatedly
     }
 
     @objc func promptForAnswer() {
-        
+       
         let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
         ac.addTextField()
         
@@ -69,8 +81,8 @@ class ViewController: UITableViewController {
         
         ac.addAction(submitAction)
         present(ac,animated: true)
-        
     }
+    
     
     
     
@@ -85,7 +97,8 @@ class ViewController: UITableViewController {
             if isOriginal(word: lowerAnswer){
                 if isReal(word: lowerAnswer){
                     usedWords.insert(lowerAnswer, at: 0)
-                    
+                    let defaults = UserDefaults.standard
+                    defaults.set(usedWords,forKey: "usedWords")
                     // For adding cells smoothly
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.insertRows(at: [indexPath], with: .automatic)
